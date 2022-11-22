@@ -79,25 +79,31 @@ local opts = {
 }
 
 local mappings = {
-	["a"] = { "<cmd>Alpha<cr>", "Alpha" },
+	-- ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
 	["b"] = {
 		"<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 		"Buffers",
 	},
+	["d"] = { "<cmd>Lspsaga peek_definition<CR>", "Peek Definition" },
 	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 	["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
 	["v"] = { "<cmd>:vsplit<cr>", "split" },
 	["w"] = { "<cmd>w!<CR>", "Save" },
 	["q"] = { "<cmd>q!<CR>", "Quit" },
-	["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-	["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-	["f"] = {
-		"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-		"Find files",
-	},
+	["n"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
 	["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
 	["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
-  ["/"] = { "<cmd>CommentToggle<cr>", "Comment" },
+	["/"] = { "<cmd>CommentToggle<cr>", "Comment" },
+	["h"] = { "^", "^" },
+	["l"] = { "$", "$" },
+  f = {
+    name = "format/find",
+    f = {
+      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      "Find files",
+    },
+    m = { "<cmd>lua vim.lsp.buf.format({async = true})<cr>", "format" },
+  },
 	p = {
 		name = "Packer",
 		c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -130,7 +136,7 @@ local mappings = {
 		},
 	},
 
-	l = {
+	a = {
 		name = "LSP",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 		d = {
@@ -161,7 +167,7 @@ local mappings = {
 			"Workspace Symbols",
 		},
 	},
-	s = {
+	S = {
 		name = "Search",
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
 		c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
@@ -177,12 +183,18 @@ local mappings = {
 		name = "Terminal",
 		n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
 		u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-		t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-		p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-		f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
+		t = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
 		h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
 		v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
 	},
+
+  s = {
+    name = "Saga",
+		a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+		f = { "<cmd>Lspsaga lsp_finder<cr>", "Saga lsp finder" },
+		n = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Error" },
+		p = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev Error" },
+  },
 }
 
 which_key.setup(setup)

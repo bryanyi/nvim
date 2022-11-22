@@ -1,4 +1,4 @@
-vim.cmd [[
+vim.cmd[[
   augroup _general_settings
     autocmd!
     autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
@@ -29,26 +29,27 @@ vim.cmd [[
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
 
-  augroup _change_liquid_filetype
-  au!
-  autocmd BufNewFile,BufRead *.liquid set filetype=html
-  augroup END
-
-  augroup _liquid_scss
-  au!
-  autocmd BufNewFile,BufRead *.scss.liquid set filetype=liquid
-  augroup END
-
-  augroup _liquid_css
-  au!
-  autocmd BufNewFile,BufRead *.css.liquid set filetype=liquid
-  augroup END
-
-  augroup _js_liquid
-  au!
-  autocmd BufNewFile,BufRead *.js.liquid set filetype=javascript
-  augroup END
 ]]
+
+-- augroup _change_liquid_filetype
+-- au!
+-- autocmd BufNewFile,BufRead *.liquid set filetype=html
+-- augroup END
+--
+-- augroup _liquid_scss
+-- au!
+-- autocmd BufNewFile,BufRead *.scss.liquid set filetype=liquid
+-- augroup END
+--
+-- augroup _liquid_css
+-- au!
+-- autocmd BufNewFile,BufRead *.css.liquid set filetype=liquid
+-- augroup END
+--
+-- augroup _js_liquid
+-- au!
+-- autocmd BufNewFile,BufRead *.js.liquid set filetype=javascript
+-- augroup END
 
 -- Autoformat
 -- augroup _lsp

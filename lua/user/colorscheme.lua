@@ -1,7 +1,7 @@
 vim.cmd[[
   try
 
-  colorscheme tokyonight-moon
+  colorscheme nightfly
 
   catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme default
@@ -15,10 +15,9 @@ vim.cmd[[
   highlight TSMethod guifg=#DCDCAA
   highlight TSProperty guifg=#54BAB9
 ]]
--- local colorscheme = "tokyonight-moon"
---
--- local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
--- if not status_ok then
---   -- vim.notify("colorscheme " .. colorscheme .. " not found!")
+
+-- local status, _ = pcall(vim.cmd, "colorscheme nightfly")
+-- if not status then
+--   print("Colorscheme not found!") -- print error if colorscheme not installed
 --   return
 -- end

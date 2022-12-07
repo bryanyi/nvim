@@ -37,9 +37,14 @@ mason_null_ls.setup({
   ensure_installed = {
     "prettier",
     "stylua",
+    "luacheck",
     "eslind_d",
     "golangci_lint",
     "flake8",
-    "clang_format"
+    "clang_format",
+    "markdownlint",
+    "yamlfmt",
+    "yamllint",
+    "hadolint",
   }
 })

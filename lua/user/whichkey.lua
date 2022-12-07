@@ -147,7 +147,7 @@ local mappings = {
 			"<cmd>Telescope lsp_workspace_diagnostics<cr>",
 			"Workspace Diagnostics",
 		},
-		f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+		f = { "<cmd>lua vim.lsp.buf.format {async = true}<cr>", "Format" },
 		i = { "<cmd>LspInfo<cr>", "Info" },
 		I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
 		j = {
@@ -167,6 +167,13 @@ local mappings = {
 			"Workspace Symbols",
 		},
 	},
+  u = {
+    name = "Filetype",
+		q = { "<cmd>set filetype=javascript<cr>", "javascript" },
+		w = { "<cmd>set filetype=html<cr>", "html" },
+		e = { "<cmd>set filetype=css<cr>", "css" },
+		r = { "<cmd>set filetype=liquid<cr>", "liquid" },
+  },
 	S = {
 		name = "Search",
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },

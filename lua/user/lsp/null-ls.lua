@@ -14,9 +14,15 @@ null_ls.setup({
   sources = {
     -- Web Dev
     formatting.prettier,
-    formatting.black.with({ extra_args = { "--fast" } }),
+    -- diagnostics.standardjs,
+
+    -- Lua
     formatting.stylua,
-    diagnostics.standardjs,
+    diagnostics.luacheck,
+    diagnostics.selene,
+
+    -- python
+    formatting.black.with({ extra_args = { "--fast" } }),
 
     -- Java
     formatting.google_java_format,
@@ -25,8 +31,17 @@ null_ls.setup({
     formatting.gofmt,
     diagnostics.golangci_lint,
 
+    -- XML
+    formatting.xmlformat,
+
+    -- YAML
+    -- formatting.yamlfmt,
+    -- diagnostics.yamllint,
+    diagnostics.actionlint,
+
     -- C++
-    -- formatting.clang_format,
-    -- diagnostics.cppcheck,
+    formatting.clang_format,
+    diagnostics.cppcheck,
+
   },
 })

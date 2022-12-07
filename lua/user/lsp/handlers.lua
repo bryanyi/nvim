@@ -14,12 +14,9 @@ M.setup = function()
   end
 
   local config = {
-    -- disable virtual text
-    virtual_text = false,
-    -- show signs
-    signs = {
-      active = signs,
-    },
+    -- https://github.com/neovim/nvim-lspconfig/wiki/UI-customization#customizing-how-diagnostics-are-displayed
+    virtual_text = true, -- diagnostics showing up in real time
+    signs = true,
     update_in_insert = true,
     underline = true,
     severity_sort = true,
@@ -42,6 +39,14 @@ M.setup = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
+
+  -- Had this to show the real-time diagnostics...but turns out virtual_text is just needed to be true
+  -- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  --   virtual_text = true,
+  --   signs = true,
+  --   underline = true,
+  --   update_in_insert = true,
+  -- })
 end
 
 local function lsp_highlight_document(client)
@@ -54,7 +59,7 @@ local function lsp_highlight_document(client)
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
-    ]],
+    ]] ,
       false
     )
   end
@@ -84,12 +89,29 @@ local function lsp_keymaps(bufnr)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
+local function attach_navic(client, bufnr)
+  vim.g.navic_silence = true
+  local status_ok, navic = pcall(require, "nvim-navic")
+  if not status_ok then
+    return
+  end
+  navic.attach(client, bufnr)
+end
+
 M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     client.server_capabilities.document_formatting = false
   end
   lsp_keymaps(bufnr)
+  attach_navic(client, bufnr)
   lsp_highlight_document(client)
+  if client.name == "jdt.ls" then
+    vim.lsp.codelens.refresh()
+    -- if JAVA_DAP_ACTIVE then
+    --   require("jdtls").setup_dap { hotcodereplace = "auto" }
+    --   require("jdtls.dap").setup_dap_main_class_configs()
+    -- end
+  end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

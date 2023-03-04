@@ -103,6 +103,23 @@ lspconfig["sumneko_lua"].setup({
     },
   },
 })
+lspconfig["yamlls"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] = "/*.k8s.yaml",
+        ["https://raw.githubusercontent.com/quantumblacklabs/kedro/develop/static/jsonschema/kedro-catalog-0.17.json"] = "conf/**/*catalog*",
+      },
+    },
+  },
+})
+
+lspconfig["gopls"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
 
 -- lspconfig["jdtls"].setup({
 --   capabilities = capabilities,

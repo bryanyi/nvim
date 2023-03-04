@@ -19,7 +19,7 @@ null_ls.setup({
     -- Lua
     formatting.stylua,
     diagnostics.luacheck,
-    diagnostics.selene,
+    -- diagnostics.selene,
 
     -- python
     formatting.black.with({ extra_args = { "--fast" } }),
@@ -29,10 +29,11 @@ null_ls.setup({
 
     -- Go
     formatting.gofmt,
-    diagnostics.golangci_lint,
+    -- diagnostics.golangci_lint,
 
     -- XML
     formatting.xmlformat,
+    diagnostics.tidy,
 
     -- YAML
     -- formatting.yamlfmt,

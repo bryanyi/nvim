@@ -3,30 +3,29 @@ if not status_ok then
   return
 end
 
-
 local colors = {
-  bg       = '#202328',
-  fg       = '#bbc2cf',
-  yellow   = '#ECBE7B',
-  cyan     = '#008080',
-  darkblue = '#081633',
-  green    = '#98be65',
-  orange   = '#FF8800',
-  violet   = '#a9a1e1',
-  magenta  = '#c678dd',
-  blue     = '#51afef',
-  red      = '#ec5f67',
+  bg = "#202328",
+  fg = "#bbc2cf",
+  yellow = "#ECBE7B",
+  cyan = "#008080",
+  darkblue = "#081633",
+  green = "#98be65",
+  orange = "#FF8800",
+  violet = "#a9a1e1",
+  magenta = "#c678dd",
+  blue = "#51afef",
+  red = "#ec5f67",
 }
 local bubble_theme_colors = {
-  blue       = '#80a0ff',
-  cyan       = '#79dac8',
-  black      = '#080808',
-  white      = '#c6c6c6',
-  red        = '#ff5189',
-  violet     = '#d183e8',
-  grey       = '#303030',
+  blue = "#80a0ff",
+  cyan = "#79dac8",
+  black = "#080808",
+  white = "#c6c6c6",
+  red = "#ff5189",
+  violet = "#d183e8",
+  grey = "#303030",
   darkerCyan = "#037e91",
-  darkPink   = '#e0849f'
+  darkPink = "#e0849f",
 }
 local bubbles_theme = {
   normal = {
@@ -55,7 +54,7 @@ local theme = require("lualine.themes.nightfly")
 local icons = require("user.icons")
 
 local filename = {
-  'filename',
+  "filename",
   file_status = true, -- Displays file status (readonly status, modified status)
   newfile_status = false, -- Display new file status (new file means no write after created)
   path = 0, -- 0: Just the filename
@@ -66,32 +65,43 @@ local filename = {
   shorting_target = 40, -- Shortens path to leave 40 spaces in the window
   -- for other components. (terrible name, any suggestions?)
   symbols = {
-    modified = '[+]', -- Text to show when the file is modified.
-    readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
-    unnamed = '[No Name]', -- Text to show for unnamed buffers.
-    newfile = '[New]', -- Text to show for new created file before first writting
-  }
+    modified = "[+]", -- Text to show when the file is modified.
+    readonly = "[-]", -- Text to show when the file is non-modifiable or readonly.
+    unnamed = "[No Name]", -- Text to show for unnamed buffers.
+    newfile = "[New]", -- Text to show for new created file before first writting
+  },
 }
 
 local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
   -- sections = { 'error', 'warn', 'info', 'hint' },
-  sections = { 'error', 'warn' },
-  symbols = { error = "🐞 ", warn = "🚧 ", info = "🌻 ", hint = "💡 " },
+  sections = { "error", "warn", "hint" },
+  -- symbols = { error = "🐞 ", warn = "🚧 ", info = "🌻 ", hint = "💡 " },
+  symbols = {
+    error = icons.diagnostics.BoldError,
+    warn = icons.diagnostics.BoldWarning,
+    info = icons.diagnostics.Information,
+    hint = icons.diagnostics.Hint .. " ",
+  },
   diagnostics_color = {
     color_error = { fg = colors.red },
     color_warn = { fg = colors.orange },
     color_info = { fg = colors.green },
     hint = { fg = colors.yellow },
   },
-  always_visible = true,
+  always_visible = false,
 }
 
 local diff = {
   "diff",
   colored = true,
-  symbols = { added = "+", modified = "~", removed = "-" }, -- changes diff symbols
+  -- symbols = { added = "+", modified = "~", removed = "-" }, -- changes diff symbols
+  symbols = {
+    added = icons.git.Add .. " ",
+    modified = icons.git.Mod .. " ",
+    removed = icons.git.Remove .. " ",
+  },
   -- cond = hide_in_width,
 }
 
@@ -196,9 +206,9 @@ lualine.setup({
     -- component_separators = { left = "", right = "" },
     -- section_separators = { left = "", right = "" },
     -- component_separators = { left = "", right = "" },
-    component_separators = '|',
+    component_separators = "|",
     -- section_separators = { left = "", right = "" },
-    section_separators = { left = '', right = '' },
+    section_separators = { left = "", right = "" },
     disabled_filetypes = {
       statusline = {},
       winbar = {},
@@ -214,8 +224,8 @@ lualine.setup({
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "branch", diff, diagnostics },
-    lualine_c = { filename },
+    lualine_b = { "branch", diff },
+    lualine_c = { diagnostics, filename },
     lualine_x = { "filetype" },
     lualine_y = { "filesize" },
     lualine_z = { "location" },

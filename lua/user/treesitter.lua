@@ -12,6 +12,7 @@ configs.setup({
 	},
 	highlight = {
 		enable = true, -- false will disable the whole extension
+    disable = {"markdown"},
 		additional_vim_regex_highlighting = true,
 	},
 	-- indent = { enable = true, disable = { "yaml" } },
